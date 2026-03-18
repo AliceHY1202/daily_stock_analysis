@@ -159,9 +159,10 @@ jobs:
           # ==========================================
           # 运行配置 ⬅️ 新增！
           # ==========================================
-          REPORT_TYPE: ${{ vars.REPORT_TYPE || secrets.REPORT_TYPE || 'simple' }}
+          REPORT_TYPE: ${{ vars.REPORT_TYPE || secrets.REPORT_TYPE || 'dashboard' }}
           SINGLE_STOCK_NOTIFY: ${{ vars.SINGLE_STOCK_NOTIFY || secrets.SINGLE_STOCK_NOTIFY || 'false' }}
           MARKET_REVIEW_ENABLED: ${{ vars.MARKET_REVIEW_ENABLED || secrets.MARKET_REVIEW_ENABLED || 'true' }}
+          MERGE_EMAIL_NOTIFICATION: ${{ vars.MERGE_EMAIL_NOTIFICATION || secrets.MERGE_EMAIL_NOTIFICATION || 'true' }}
           ANALYSIS_DELAY: ${{ vars.ANALYSIS_DELAY || secrets.ANALYSIS_DELAY || '0' }}
           TRADING_DAY_CHECK_ENABLED: ${{ vars.TRADING_DAY_CHECK_ENABLED || secrets.TRADING_DAY_CHECK_ENABLED || 'true' }}
           
@@ -271,22 +272,5 @@ jobs:
             echo "📜 最近日志（最后 30 行）:"
             tail -30 logs/stock_analysis_*.log 2>/dev/null || echo "无日志"
           fi
-      - name: 发送邮件测试
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          secure: true
-          username: ${{ secrets.EMAIL_SENDER }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: ✅ A股分析邮件测试成功
-          to: ${{ secrets.EMAIL_RECEIVERS }}
-          from: ${{ secrets.EMAIL_SENDER_NAME }} <${{ secrets.EMAIL_SENDER }}>
-          body: |
-            恭喜你！
-
-            如果你收到这封邮件，说明：
-            ✅ GitHub Actions 已成功发送邮件
-            ✅ 邮箱配置完全正确
-
-            下一步我们可以加“股票分析报告附件”
+    
+         
