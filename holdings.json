@@ -1,1 +1,36 @@
-
+{
+  "total_capital": 20000,
+  "current_cash": 0,
+  "positions": [
+    {
+      "name": "岩山科技",
+      "symbol": "002195",
+      "shares": 200,
+      "cost": 10.835
+    },
+    {
+      "name": "北新路桥",
+      "symbol": "002307",
+      "shares": 300,
+      "cost": 5.217
+    },
+    {
+      "name": "亚太药业",
+      "symbol": "002370",
+      "shares": 200,
+      "cost": 6.685
+    },
+    {
+      "name": "上海机场",
+      "symbol": "600009",
+      "shares": 200,
+      "cost": 31.295
+    },
+    {
+      "name": "大智慧",
+      "symbol": "601519",
+      "shares": 200,
+      "cost": 12.405
+    }
+  ]
+}
