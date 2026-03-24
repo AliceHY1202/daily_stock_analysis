@@ -4,9 +4,9 @@ from email.message import EmailMessage
 
 
 def send_email(subject: str, body: str):
-    sender = os.environ["MAIL_SENDER"]
-    password = os.environ["MAIL_PASSWORD"]
-    recipient = os.environ["MAIL_RECIPIENT"]
+    sender = os.environ["EMAIL_SENDER"]
+    password = os.environ["EMAIL_PASSWORD"]
+    recipient = os.environ["EMAIL_RECEIVERS"]
 
     msg = EmailMessage()
     msg["Subject"] = subject
