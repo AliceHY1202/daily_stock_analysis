@@ -243,15 +243,23 @@ jobs:
           else
             python main.py $FORCE_RUN_ARG
           fi
-      
+       name: Debug files   # 👈 就插在这里！！！
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "List files:"
+          ls -la
+          echo "Find files:"
+          find . -maxdepth 3 -type f
+          
       - name: 上传分析报告
         uses: actions/upload-artifact@v6
         if: always()
         with:
           name: analysis-reports-${{ github.run_number }}
           path: |
-            reports/
-            logs/
+            reports/**
+            logs/**
           retention-days: 30
       
       - name: 显示运行结果
