@@ -1,0 +1,57 @@
+name: 每日股票分析
+
+on:
+  schedule:
+    - cron: '0 10 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ 拉代码
+      - name: 检出代码
+        uses: actions/checkout@v5
+
+      # 2️⃣ Python 环境
+      - name: 设置 Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      # 3️⃣ 安装依赖
+      - name: 安装依赖
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4️⃣ 创建目录（你原来的逻辑 ✅）
+      - name: 创建目录
+        run: |
+          mkdir -p reports logs
+
+      # 5️⃣ 运行主程序（你原来的核心代码 ✅）
+      - name: Run analysis
+        run: python main.py
+
+      # 🔥 6️⃣ 新增：Debug（定位问题用）
+      - name: Debug files
+        run: |
+          echo "当前目录:"
+          pwd
+          echo "所有文件:"
+          ls -la
+          echo "文件树:"
+          find . -maxdepth 3 -type f
+
+      # 🔥 7️⃣ 修复后的 artifact 上传（关键修改）
+      - name: 上传分析报告
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: analysis-reports
+          path: |
+            reports/**
+            logs/**
+          retention-days: 30
